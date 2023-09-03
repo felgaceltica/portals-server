@@ -2,6 +2,9 @@
 
 This server is used as a main server for all my islands.
 
+**Need a custom server but don't know how to code and/or can't afford it?**
+Feel free to reach out to me, I would be happy to add a room for you on my server!
+
 ## Currently Supported Islands
 
 ### Project Dignity's Island
