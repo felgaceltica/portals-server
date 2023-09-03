@@ -8,6 +8,7 @@ import {
 } from "./projectdignityRoomState";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
+import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
 
@@ -151,7 +152,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
       experience: number;
     }
   ) {
-    console.log("onJoin", client.sessionId, options, auth);
+    logVisit("projectdignity", auth.farmId);
 
     this.farmConnections[auth.farmId] = client.sessionId;
 

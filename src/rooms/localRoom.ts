@@ -8,6 +8,7 @@ import {
 } from "./localRoomState";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
+import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
 
@@ -151,7 +152,7 @@ export class LocalRoom extends Room<RoomState> {
       experience: number;
     }
   ) {
-    console.log("onJoin", client.sessionId, options, auth);
+    logVisit("local", auth.farmId);
 
     this.farmConnections[auth.farmId] = client.sessionId;
 

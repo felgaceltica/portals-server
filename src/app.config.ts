@@ -8,7 +8,7 @@ import { IngalsRoom } from "./rooms/ingalsRoom";
 import { ProjectDignityRoom } from "./rooms/projectdignityRoom";
 import { PropHuntRoom } from "./rooms/prophuntRoom";
 
-console.log(process.env.ADMIN_PASS);
+import { connect } from "./db/client";
 
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
@@ -48,5 +48,7 @@ export default config({
     );
   },
 
-  beforeListen: () => {},
+  beforeListen: () => {
+    connect();
+  },
 });
