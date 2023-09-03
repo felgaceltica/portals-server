@@ -33,7 +33,9 @@ export default config({
       app.use("/", playground);
     } else {
       app.get("/", (req, res) => {
-        res.send("Server is up and running.");
+        res.redirect(
+          "https://github.com/0xSacul/sacul-community-island-server"
+        );
       });
     }
 
