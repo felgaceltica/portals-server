@@ -5,7 +5,7 @@ import {
   Message,
   RoomState,
   Player,
-} from "./ingalsRoomState";
+} from "./state/ingals";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { logVisit } from "../db/logger";

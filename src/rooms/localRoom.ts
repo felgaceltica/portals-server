@@ -1,11 +1,5 @@
 import { Room, Client } from "colyseus";
-import {
-  Clothing,
-  InputData,
-  Message,
-  RoomState,
-  Player,
-} from "./localRoomState";
+import { Clothing, InputData, Message, RoomState, Player } from "./state/local";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { logVisit } from "../db/logger";

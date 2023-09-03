@@ -6,7 +6,7 @@ import {
   ArraySchema,
   filterChildren,
 } from "@colyseus/schema";
-import { Equipped } from "../types/bumpkin";
+import { Equipped } from "../../types/bumpkin";
 
 export interface InputData {
   x: number;

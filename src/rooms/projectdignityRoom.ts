@@ -5,7 +5,7 @@ import {
   Message,
   RoomState,
   Player,
-} from "./projectdignityRoomState";
+} from "./state/projectdignity";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { logVisit } from "../db/logger";

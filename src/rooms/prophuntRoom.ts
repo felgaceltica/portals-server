@@ -5,7 +5,7 @@ import {
   Message,
   RoomState,
   Player,
-} from "./prophuntRoomState";
+} from "./state/prophunt";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { logVisit } from "../db/logger";
