@@ -43,7 +43,7 @@ const populateProjectDignity = async (farmId: number) => {
 
   const existingFarm = await collection.findOne({ farmId });
 
-  if (!existingFarm || !existingFarm.farm) return;
+  if (!existingFarm || !existingFarm.wallet) return;
 
   const data = await getWalletAssets(existingFarm.wallet);
 
