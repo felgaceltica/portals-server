@@ -8,6 +8,7 @@ import {
 } from "./state/projectdignity";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
+import { connect, isConnected, getDatabase } from "../db/client";
 import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
@@ -16,6 +17,9 @@ export class ProjectDignityRoom extends Room<RoomState> {
   fixedTimeStep = 1000 / 60;
 
   maxClients: number = 150;
+
+  private database = getDatabase();
+  private collection = this.database.collection("projectdignity");
 
   private pushMessage = (message: Message) => {
     this.state.messages.push(message);
@@ -40,6 +44,29 @@ export class ProjectDignityRoom extends Room<RoomState> {
 
       // enqueue input to user input buffer.
       player?.inputQueue.push(input);
+    });
+
+    this.onMessage("quest_event", async (client, input) => {
+      const player = this.state.players.get(client.sessionId);
+      if (!player) return;
+      if (!isConnected()) connect();
+
+      const player_data = await this.collection.findOne({
+        farmId: player.farmId,
+      });
+
+      if (!player_data) return;
+
+      if (!player_data.quests) player_data.quests = [];
+
+      player_data.quests.push(input);
+
+      await this.collection.updateOne(
+        { farmId: player.farmId },
+        { $set: { quests: player_data.quests } }
+      );
+
+      this.broadcast("player_data", player_data);
     });
 
     let elapsedTime = 0;
@@ -142,7 +169,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
     // };
   }
 
-  onJoin(
+  async onJoin(
     client: Client,
     options: { x: number; y: number },
     auth: {
@@ -152,7 +179,11 @@ export class ProjectDignityRoom extends Room<RoomState> {
       experience: number;
     }
   ) {
-    logVisit("projectdignity", auth.farmId);
+    await logVisit("projectdignity", auth.farmId);
+
+    if (!isConnected()) connect();
+
+    const db_data = await this.collection.findOne({ farmId: auth.farmId });
 
     this.farmConnections[auth.farmId] = client.sessionId;
 
@@ -176,6 +207,13 @@ export class ProjectDignityRoom extends Room<RoomState> {
     player.sceneId = auth.sceneId;
 
     this.state.players.set(client.sessionId, player);
+
+    delete db_data._id;
+
+    if (!db_data.assets) db_data.assets = [];
+    if (!db_data.quests) db_data.quests = [];
+
+    this.broadcast("player_data", db_data);
   }
 
   onLeave(client: Client, consented: boolean) {
