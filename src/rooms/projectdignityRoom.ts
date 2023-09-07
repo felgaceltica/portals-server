@@ -66,6 +66,8 @@ export class ProjectDignityRoom extends Room<RoomState> {
         { $set: player_data }
       );
 
+      delete player_data._id;
+
       this.broadcast("player_data", player_data);
     });
 
