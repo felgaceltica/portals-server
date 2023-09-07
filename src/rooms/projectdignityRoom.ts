@@ -63,7 +63,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
 
       await this.collection.updateOne(
         { farmId: player.farmId },
-        { $set: { quests: player_data.quests } }
+        { $set: player_data }
       );
 
       this.broadcast("player_data", player_data);
