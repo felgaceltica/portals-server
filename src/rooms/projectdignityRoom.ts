@@ -211,7 +211,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
     delete db_data._id;
 
     if (!db_data.assets) db_data.assets = [];
-    if (!db_data.quests) db_data.quests = [];
+    if (!db_data.quests) db_data.quests = {};
 
     this.broadcast("player_data", db_data);
   }
