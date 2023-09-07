@@ -57,9 +57,9 @@ export class ProjectDignityRoom extends Room<RoomState> {
 
       if (!player_data) return;
 
-      if (!player_data.quests) player_data.quests = [];
+      if (!player_data.quests) player_data.quests = {};
 
-      player_data.quests.push(input);
+      player_data.quests = input;
 
       await this.collection.updateOne(
         { farmId: player.farmId },
