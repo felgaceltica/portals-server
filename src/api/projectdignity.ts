@@ -1,4 +1,4 @@
-const PD_API_URL = "http://localhost:3000";
+const PD_API_URL = process.env.PD_API_URL;
 const PD_API_KEY = process.env.PD_API_KEY;
 
 export const getWalletAssets = async (address: string) => {
