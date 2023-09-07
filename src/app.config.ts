@@ -10,6 +10,10 @@ import { PropHuntRoom } from "./rooms/prophuntRoom";
 
 import { connect } from "./db/client";
 
+import mainRouter from "./api";
+
+import { getWalletAssets } from "./api/projectdignity";
+
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
   users: {
@@ -46,6 +50,8 @@ export default config({
         columns: ["roomId", "name", "clients", "elapsedTime"],
       })
     );
+
+    app.use("/api", mainRouter);
   },
 
   beforeListen: () => {

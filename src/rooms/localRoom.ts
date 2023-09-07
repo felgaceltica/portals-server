@@ -116,24 +116,6 @@ export class LocalRoom extends Room<RoomState> {
       sceneId: options.sceneId,
       experience: options.experience,
     };
-
-    // console.log("Try auth plaza", { options });
-    // if (!options.jwt || !options.farmId) return false;
-
-    // const jwt = await verifyRawJwt(options.jwt);
-
-    // if (!jwt.userAccess.verified) return false;
-
-    // const farm = await loadFarm(options.farmId);
-
-    // if (!farm || farm.updatedBy !== jwt.address) {
-    //   throw new Error("Not your farm");
-    // }
-
-    // return {
-    //   bumpkin: farm.gameState.bumpkin,
-    //   farmId: options.farmId,
-    // };
   }
 
   onJoin(

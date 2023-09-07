@@ -5,12 +5,15 @@ import {
   Message,
   RoomState,
   Player,
+  GameState,
+  GameEvent,
 } from "./state/prophunt";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
+const MAX_EVENTS = 100;
 
 export class PropHuntRoom extends Room<RoomState> {
   fixedTimeStep = 1000 / 60;
@@ -25,21 +28,61 @@ export class PropHuntRoom extends Room<RoomState> {
     }
   };
 
+  private pushGameEvent = (event: GameEvent) => {
+    console.log("pushing game event", event);
+    // send game event to all clients
+    this.state.events.push(event);
+
+    while (this.state.events.length > MAX_EVENTS) {
+      this.state.events.shift();
+    }
+  };
+
+  private pushGameState = (gameState: GameState) => {
+    this.state.game = gameState;
+
+    // send game state to all clients
+    this.broadcast("game_state", gameState);
+  };
+
   // Farm ID > sessionId
   private farmConnections: Record<number, string> = {};
 
   onCreate(options: any) {
-    this.setState(new RoomState());
+    const roomState = new RoomState();
+
+    // Pre-define Game State
+    roomState.game.nextRoundMap = "island";
+    roomState.game.nextRoundAt = Date.now() + 1000 * 60 * 5;
+    roomState.game.roundStartedAt = 0;
+    roomState.game.status = "waiting";
+
+    this.setState(roomState);
 
     // set map dimensions
     (this.state.mapWidth = 600), (this.state.mapHeight = 600);
 
     this.onMessage(0, (client, input) => {
+      console.log(client.auth);
+      console.log(input);
       // handle player input
       const player = this.state.players.get(client.sessionId);
 
       // enqueue input to user input buffer.
       player?.inputQueue.push(input);
+    });
+
+    this.onMessage("player_transform", (client, input) => {
+      console.log("player_transform", input);
+      const player = this.state.players.get(client.sessionId);
+      if (player) {
+        player.prop = input.prop;
+      }
+
+      this.broadcast("player_transform", {
+        sessionId: client.sessionId,
+        prop: input.prop,
+      });
     });
 
     let elapsedTime = 0;
@@ -122,24 +165,6 @@ export class PropHuntRoom extends Room<RoomState> {
       sceneId: options.sceneId,
       experience: options.experience,
     };
-
-    // console.log("Try auth plaza", { options });
-    // if (!options.jwt || !options.farmId) return false;
-
-    // const jwt = await verifyRawJwt(options.jwt);
-
-    // if (!jwt.userAccess.verified) return false;
-
-    // const farm = await loadFarm(options.farmId);
-
-    // if (!farm || farm.updatedBy !== jwt.address) {
-    //   throw new Error("Not your farm");
-    // }
-
-    // return {
-    //   bumpkin: farm.gameState.bumpkin,
-    //   farmId: options.farmId,
-    // };
   }
 
   onJoin(
@@ -175,7 +200,14 @@ export class PropHuntRoom extends Room<RoomState> {
 
     player.sceneId = auth.sceneId;
 
+    // Game Specific State
+    player.team = "neutral";
+    player.prop = "none";
+    player.health = 100;
+    player.status = "alive";
+
     this.state.players.set(client.sessionId, player);
+    this.pushGameState(this.state.game);
   }
 
   onLeave(client: Client, consented: boolean) {
