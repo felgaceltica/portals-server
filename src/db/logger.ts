@@ -51,6 +51,6 @@ const populateProjectDignity = async (farmId: number) => {
 
   await collection.updateOne(
     { farmId },
-    { $set: { assets: allAssets, quests: [] } }
+    { $set: { assets: allAssets, quests: {} } }
   );
 };
