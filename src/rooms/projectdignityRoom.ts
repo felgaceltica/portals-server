@@ -57,9 +57,13 @@ export class ProjectDignityRoom extends Room<RoomState> {
 
       if (!player_data) return;
 
-      if (!player_data.quests) player_data.quests = {};
+      if (!player_data.quests)
+        player_data.quests = { season_1: {}, season_2: {} };
 
       player_data.quests = input;
+
+      if (!player_data.quests.season_1) player_data.quests.season_1 = {};
+      if (!player_data.quests.season_2) player_data.quests.season_2 = {};
 
       await this.collection.updateOne(
         { farmId: player.farmId },
@@ -151,24 +155,6 @@ export class ProjectDignityRoom extends Room<RoomState> {
       sceneId: options.sceneId,
       experience: options.experience,
     };
-
-    // console.log("Try auth plaza", { options });
-    // if (!options.jwt || !options.farmId) return false;
-
-    // const jwt = await verifyRawJwt(options.jwt);
-
-    // if (!jwt.userAccess.verified) return false;
-
-    // const farm = await loadFarm(options.farmId);
-
-    // if (!farm || farm.updatedBy !== jwt.address) {
-    //   throw new Error("Not your farm");
-    // }
-
-    // return {
-    //   bumpkin: farm.gameState.bumpkin,
-    //   farmId: options.farmId,
-    // };
   }
 
   async onJoin(
@@ -213,7 +199,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
     delete db_data._id;
 
     if (!db_data.assets) db_data.assets = [];
-    if (!db_data.quests) db_data.quests = {};
+    if (!db_data.quests) db_data.quests = { season_1: {}, season_2: {} };
 
     this.broadcast("player_data", db_data);
   }
