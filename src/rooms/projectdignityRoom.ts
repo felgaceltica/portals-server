@@ -176,8 +176,8 @@ export class ProjectDignityRoom extends Room<RoomState> {
     this.farmConnections[auth.farmId] = client.sessionId;
 
     const player = new Player();
-    player.x = options.x ?? 560; // Math.random() * this.state.mapWidth;
-    player.y = options.y ?? 300; //Math.random() * this.state.mapHeight;
+    player.x = options.x ?? 567; // Math.random() * this.state.mapWidth;
+    player.y = options.y ?? 770; //Math.random() * this.state.mapHeight;
     player.farmId = auth.farmId;
     player.experience = auth.experience ?? 0;
 
