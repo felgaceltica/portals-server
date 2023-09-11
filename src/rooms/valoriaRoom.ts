@@ -5,7 +5,7 @@ import {
   Message,
   RoomState,
   Player,
-} from "./state/projectdignity";
+} from "./state/valoria";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { connect, isConnected, getDatabase } from "../db/client";
@@ -13,14 +13,14 @@ import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
 
-export class ProjectDignityRoom extends Room<RoomState> {
+export class ValoriaRoom extends Room<RoomState> {
   fixedTimeStep = 1000 / 60;
 
   maxClients: number = 150;
 
   private database = getDatabase();
   private settings = this.database.collection("settings");
-  private collection = this.database.collection("projectdignity");
+  private collection = this.database.collection("valoria");
 
   private pushMessage = (message: Message) => {
     this.state.messages.push(message);
@@ -98,11 +98,6 @@ export class ProjectDignityRoom extends Room<RoomState> {
         this.fixedTick(this.fixedTimeStep);
       }
     });
-
-    const message = new Message();
-    message.text = `Welcome to ${this.roomName.replace("_", " ")}.`;
-    message.sentAt = Date.now();
-    this.pushMessage(message);
   }
 
   fixedTick(timeStep: number) {
@@ -181,7 +176,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
       experience: number;
     }
   ) {
-    await logVisit("projectdignity", auth.farmId);
+    await logVisit("valoria", auth.farmId);
 
     if (!isConnected()) connect();
 
