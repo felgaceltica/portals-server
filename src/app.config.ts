@@ -25,7 +25,7 @@ const basicAuthMiddleware = basicAuth({
 export default config({
   initializeGameServer: (gameServer) => {
     gameServer.define("local", LocalRoom);
-    gameServer.define("project_dignity", ValoriaRoom);
+    gameServer.define("valoria", ValoriaRoom);
     gameServer.define("prop_hunt", PropHuntRoom);
     gameServer.define("ingals_room", IngalsRoom);
   },
