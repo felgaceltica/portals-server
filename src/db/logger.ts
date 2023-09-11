@@ -4,9 +4,7 @@ import { getFarm } from "../web3/Alchemy";
 import { getWalletAssets } from "../api/projectdignity";
 
 export const logVisit = async (scene: string, farmId: number) => {
-  if (!isConnected()) {
-    await connect();
-  }
+  if (!isConnected()) await connect();
 
   const database = getDatabase();
   const collection = database.collection(scene);
@@ -32,14 +30,14 @@ export const logVisit = async (scene: string, farmId: number) => {
     });
   }
 
-  if (scene === "projectdignity") populateProjectDignity(farmId);
+  if (scene === "valoria") populateValoria(farmId);
 };
 
-const populateProjectDignity = async (farmId: number) => {
-  if (!isConnected()) return;
+const populateValoria = async (farmId: number) => {
+  if (!isConnected()) await connect();
 
   const database = getDatabase();
-  const collection = database.collection("projectdignity");
+  const collection = database.collection("valoria");
 
   const existingFarm = await collection.findOne({ farmId });
 

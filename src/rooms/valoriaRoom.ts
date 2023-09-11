@@ -19,6 +19,7 @@ export class ProjectDignityRoom extends Room<RoomState> {
   maxClients: number = 150;
 
   private database = getDatabase();
+  private settings = this.database.collection("settings");
   private collection = this.database.collection("projectdignity");
 
   private pushMessage = (message: Message) => {
@@ -56,14 +57,10 @@ export class ProjectDignityRoom extends Room<RoomState> {
       });
 
       if (!player_data) return;
-
-      if (!player_data.quests)
-        player_data.quests = { season_1: {}, season_2: {} };
-
-      player_data.quests = input;
-
       if (!player_data.quests.season_1) player_data.quests.season_1 = {};
       if (!player_data.quests.season_2) player_data.quests.season_2 = {};
+
+      player_data.quests = input;
 
       await this.collection.updateOne(
         { farmId: player.farmId },
@@ -73,6 +70,23 @@ export class ProjectDignityRoom extends Room<RoomState> {
       delete player_data._id;
 
       this.broadcast("player_data", player_data);
+    });
+
+    this.onMessage("quest_hoodie", async (client, input) => {
+      const settings = await this.settings.findOne({ key: "valoria" });
+      let hoodie_left = settings?.hoodieLeft;
+
+      if (!settings || !hoodie_left) return;
+
+      if (input.removeOne && hoodie_left > 0) {
+        hoodie_left--;
+        await this.settings.updateOne(
+          { key: "valoria" },
+          { $set: { hoodieLeft: hoodie_left } }
+        );
+      }
+
+      this.broadcast("quest_hoodie", { hoodieLeft: hoodie_left });
     });
 
     let elapsedTime = 0;

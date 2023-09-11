@@ -7,15 +7,18 @@ Feel free to reach out to me, I would be happy to add a room for you on my serve
 
 ## Currently Supported Islands
 
-### Project Dignity's Island
-- URL: https://0xsacul.github.io/projectdignity-community-island
-- Status: **Work in Progress**
+### Valoria Isle
+
+- URL: TBA
+- Status: **Work in Progress, Release Soon...**
 
 ### Ingals's Island
+
 - URL: https://0xsacul.github.io/ingals-community-island
 - Status: **Work in Progress**
 
 ### Prop Hunt Island
+
 - URL: https://0xsacul.github.io/prophunt-community-island
 - Status: **Work in Progress**
 

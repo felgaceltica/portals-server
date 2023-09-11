@@ -14,7 +14,7 @@ mainRouter.get("/stats/:roomId", async (req, res) => {
     res.status(400).json({ status: "error", message: "missing room id" });
     return;
   } else if (
-    roomId !== "projectdignity" &&
+    roomId !== "valoria" &&
     roomId !== "prophunt" &&
     roomId !== "ingals"
   ) {

@@ -5,14 +5,12 @@ import basicAuth from "express-basic-auth";
 
 import { LocalRoom } from "./rooms/localRoom";
 import { IngalsRoom } from "./rooms/ingalsRoom";
-import { ProjectDignityRoom } from "./rooms/projectdignityRoom";
+import { ValoriaRoom } from "./rooms/valoriaRoom";
 import { PropHuntRoom } from "./rooms/prophuntRoom";
 
 import { connect } from "./db/client";
 
 import mainRouter from "./api";
-
-import { getWalletAssets } from "./api/projectdignity";
 
 const basicAuthMiddleware = basicAuth({
   // list of users and passwords
@@ -27,7 +25,7 @@ const basicAuthMiddleware = basicAuth({
 export default config({
   initializeGameServer: (gameServer) => {
     gameServer.define("local", LocalRoom);
-    gameServer.define("project_dignity", ProjectDignityRoom);
+    gameServer.define("project_dignity", ValoriaRoom);
     gameServer.define("prop_hunt", PropHuntRoom);
     gameServer.define("ingals_room", IngalsRoom);
   },
