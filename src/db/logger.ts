@@ -27,6 +27,12 @@ export const logVisit = async (scene: string, farmId: number) => {
       visitCount: 1,
       wallet: farm.wallet_address,
       farm: farm.farm_address,
+      quests: {
+        season_1: {},
+        season_2: {},
+      },
+      assets: [],
+      canAccess: true,
     });
   }
 
@@ -47,8 +53,19 @@ const populateValoria = async (farmId: number) => {
 
   const allAssets = Object.values(data).flat();
 
+  const quests = {
+    season_1: existingFarm.quests.season_1 || {},
+    season_2: existingFarm.quests.season_2 || {},
+  };
+
   await collection.updateOne(
     { farmId },
-    { $set: { assets: allAssets, quests: { season_1: {}, season_2: {} } } }
+    {
+      $set: {
+        assets: allAssets,
+        quests: quests,
+        canAccess: existingFarm.canAccess || true,
+      },
+    }
   );
 };

@@ -181,6 +181,7 @@ export class ValoriaRoom extends Room<RoomState> {
     if (!isConnected()) connect();
 
     const db_data = await this.collection.findOne({ farmId: auth.farmId });
+    const settings = await this.settings.findOne({ key: "valoria" });
 
     this.farmConnections[auth.farmId] = client.sessionId;
 
@@ -211,6 +212,7 @@ export class ValoriaRoom extends Room<RoomState> {
     if (!db_data.quests) db_data.quests = { season_1: {}, season_2: {} };
 
     this.broadcast("player_data", db_data);
+    this.broadcast("quest_hoodie", { hoodieLeft: settings?.hoodieLeft });
   }
 
   onLeave(client: Client, consented: boolean) {
