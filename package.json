@@ -1,7 +1,7 @@
 {
-  "name": "sacul-community-island-server",
+  "name": "sacul-portals-server",
   "version": "1.0.0",
-  "description": "A Colyseus server for Sacul's Community Islands on Sunflower Land.",
+  "description": "A Colyseus server for Sacul's Portals on Sunflower Land.",
   "main": "src/index.ts",
   "engines": {
     "node": ">= 16.13.0"
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/colyseus/create-colyseus/issues"
   },
-  "homepage": "https://github.com/0xSacul/sacul-community-island-server",
+  "homepage": "https://github.com/0xSacul/sacul-portals-server",
   "devDependencies": {
     "@colyseus/loadtest": "^0.15.0",
     "@colyseus/testing": "^0.15.0",

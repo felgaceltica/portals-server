@@ -1,6 +1,6 @@
-# Sacul's Community Islands Server
+# Sacul's Portals Server
 
-This server is used as a main server for all my islands.
+This server is used as a main server for all my portals.
 
 **Need a custom server but don't know how to code and/or can't afford it?**
 Feel free to reach out to me, I would be happy to add a room for you on my server!
@@ -9,21 +9,11 @@ Feel free to reach out to me, I would be happy to add a room for you on my serve
 
 ### Valoria Isle
 
-- URL: TBA
-- Status: **Work in Progress, Release Soon...**
+- URL: Closed
+- Status: **Closed**
+- Statistics: 4 months up and running, 10.4k total players.
 
-### Ingals's Island
+### Creativia
 
-- URL: https://0xsacul.github.io/ingals-community-island
+- URL: https://creativia.sunflower-land.com/
 - Status: **Work in Progress**
-
-### Prop Hunt Island
-
-- URL: https://0xsacul.github.io/prophunt-community-island
-- Status: **Work in Progress**
-
-## How to access these islands?
-
-Head to Sunflower Land's Testnet using https://sunflower-land.com/testnet
-
-Once you're logged in change the url to https://sunflower-land.com/testnet/#/community-tools and enter the Island's URL.

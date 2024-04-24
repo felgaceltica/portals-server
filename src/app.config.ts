@@ -4,9 +4,9 @@ import { playground } from "@colyseus/playground";
 import basicAuth from "express-basic-auth";
 
 import { LocalRoom } from "./rooms/localRoom";
-import { IngalsRoom } from "./rooms/ingalsRoom";
-import { ValoriaRoom } from "./rooms/valoriaRoom";
-import { PropHuntRoom } from "./rooms/prophuntRoom";
+//import { IngalsRoom } from "./rooms/ingalsRoom";
+//import { ValoriaRoom } from "./rooms/valoriaRoom";
+//import { PropHuntRoom } from "./rooms/prophuntRoom";
 
 import { connect } from "./db/client";
 
@@ -24,10 +24,7 @@ const basicAuthMiddleware = basicAuth({
 
 export default config({
   initializeGameServer: (gameServer) => {
-    gameServer.define("local", LocalRoom);
-    gameServer.define("valoria", ValoriaRoom);
-    gameServer.define("prop_hunt", PropHuntRoom);
-    gameServer.define("ingals_room", IngalsRoom);
+    gameServer.define("town", LocalRoom);
   },
 
   initializeExpress: (app) => {
@@ -35,9 +32,7 @@ export default config({
       app.use("/", playground);
     } else {
       app.get("/", (req, res) => {
-        res.redirect(
-          "https://github.com/0xSacul/sacul-community-island-server"
-        );
+        res.redirect("https://github.com/0xSacul/sacul-portals-server");
       });
     }
 

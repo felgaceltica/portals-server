@@ -2,14 +2,14 @@ import { Room, Client } from "colyseus";
 import { Clothing, InputData, Message, RoomState, Player } from "./state/local";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
-import { logVisit } from "../db/logger";
+//import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
 
 export class LocalRoom extends Room<RoomState> {
   fixedTimeStep = 1000 / 60;
 
-  maxClients: number = 150;
+  maxClients: number = 300;
 
   private pushMessage = (message: Message) => {
     this.state.messages.push(message);
@@ -128,7 +128,7 @@ export class LocalRoom extends Room<RoomState> {
       experience: number;
     }
   ) {
-    logVisit("local", auth.farmId);
+    //logVisit("town", auth.farmId);
 
     this.farmConnections[auth.farmId] = client.sessionId;
 
