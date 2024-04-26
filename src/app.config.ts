@@ -3,7 +3,8 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import basicAuth from "express-basic-auth";
 
-import { LocalRoom } from "./rooms/localRoom";
+import { TownRoom } from "./rooms/townRoom";
+import { PlayerRoom } from "./rooms/playerRoom";
 //import { IngalsRoom } from "./rooms/ingalsRoom";
 //import { ValoriaRoom } from "./rooms/valoriaRoom";
 //import { PropHuntRoom } from "./rooms/prophuntRoom";
@@ -24,7 +25,8 @@ const basicAuthMiddleware = basicAuth({
 
 export default config({
   initializeGameServer: (gameServer) => {
-    gameServer.define("town", LocalRoom);
+    gameServer.define("town", TownRoom);
+    gameServer.define("player", PlayerRoom);
   },
 
   initializeExpress: (app) => {
