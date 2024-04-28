@@ -111,24 +111,6 @@ export class TownRoom extends Room<RoomState> {
     },
     request?: IncomingMessage | undefined
   ) {
-    fetch(
-      "https://discord.com/api/webhooks/1233563760321499206/IB-ecdkgt-cq_cFTjhHxUXsJG1X3k_RqZXW_z1u7ksv6J5oJKcAg7ri6qgnlmaqgMsn9",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content:
-            `Player of Farm ID ${options.farmId} has joined the server. Using IP: ` +
-            "```json\n" +
-            JSON.stringify(request?.socket.address()) +
-            "```\n" +
-            `User Agent: ${request?.headers["user-agent"]}`,
-        }),
-      }
-    );
-
     return {
       bumpkin: options.bumpkin,
       farmId: options.farmId,

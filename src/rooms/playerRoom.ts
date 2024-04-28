@@ -1,15 +1,15 @@
 import { Room, Client } from "colyseus";
-import { Clothing, InputData, Message, RoomState, Player } from "./state/local";
+import { Clothing, InputData, Message, RoomState, Player } from "./state/town";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 //import { logVisit } from "../db/logger";
 
 const MAX_MESSAGES = 100;
 
-export class LocalRoom extends Room<RoomState> {
+export class PlayerRoom extends Room<RoomState> {
   fixedTimeStep = 1000 / 60;
 
-  maxClients: number = 300;
+  maxClients: number = 32;
 
   private pushMessage = (message: Message) => {
     this.state.messages.push(message);
@@ -24,32 +24,7 @@ export class LocalRoom extends Room<RoomState> {
 
   onCreate(options: any) {
     this.setState(new RoomState());
-
-    // set map dimensions
-    (this.state.mapWidth = 600), (this.state.mapHeight = 600);
-
-    this.onMessage(0, (client, input) => {
-      // handle player input
-      const player = this.state.players.get(client.sessionId);
-
-      // enqueue input to user input buffer.
-      player?.inputQueue.push(input);
-    });
-
-    let elapsedTime = 0;
-    this.setSimulationInterval((deltaTime) => {
-      elapsedTime += deltaTime;
-
-      while (elapsedTime >= this.fixedTimeStep) {
-        elapsedTime -= this.fixedTimeStep;
-        this.fixedTick(this.fixedTimeStep);
-      }
-    });
-
-    const message = new Message();
-    message.text = `Welcome to ${this.roomName.replace("_", " ")}.`;
-    message.sentAt = Date.now();
-    this.pushMessage(message);
+    console.log("room created", this.roomId, options.farmId);
   }
 
   fixedTick(timeStep: number) {
@@ -129,6 +104,9 @@ export class LocalRoom extends Room<RoomState> {
     }
   ) {
     //logVisit("town", auth.farmId);
+    console.log("client joined", auth);
+
+    if (!auth.bumpkin) return;
 
     this.farmConnections[auth.farmId] = client.sessionId;
 
@@ -155,6 +133,7 @@ export class LocalRoom extends Room<RoomState> {
   }
 
   onLeave(client: Client, consented: boolean) {
+    console.log("client left", client.sessionId);
     this.state.players.delete(client.sessionId);
   }
 
