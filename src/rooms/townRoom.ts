@@ -92,7 +92,9 @@ export class TownRoom extends Room<RoomState> {
           message.sceneId = player.sceneId;
           message.text = input.text;
           message.sessionId = key;
-          message.farmId = player.farmId;
+          message.id = player.farmId;
+          message.username = player.username;
+          message.faction = player.faction;
           message.sentAt = Date.now();
           this.pushMessage(message);
         }
@@ -105,6 +107,8 @@ export class TownRoom extends Room<RoomState> {
     options: {
       jwt: string;
       farmId: number;
+      username: string;
+      faction: string;
       bumpkin: Bumpkin;
       sceneId: string;
       experience: number;
@@ -114,6 +118,8 @@ export class TownRoom extends Room<RoomState> {
     return {
       bumpkin: options.bumpkin,
       farmId: options.farmId,
+      username: options.username,
+      faction: options.faction,
       sceneId: options.sceneId,
       experience: options.experience,
     };
@@ -125,6 +131,8 @@ export class TownRoom extends Room<RoomState> {
     auth: {
       bumpkin: Bumpkin;
       farmId: number;
+      username: string;
+      faction: string;
       sceneId: string;
       experience: number;
     }
@@ -138,6 +146,8 @@ export class TownRoom extends Room<RoomState> {
     player.x = options.x ?? 560; // Math.random() * this.state.mapWidth;
     player.y = options.y ?? 300; //Math.random() * this.state.mapHeight;
     player.farmId = auth.farmId;
+    player.username = auth.username;
+    player.faction = auth.faction;
     player.experience = auth.experience ?? 0;
 
     const clothing = auth.bumpkin.equipped;

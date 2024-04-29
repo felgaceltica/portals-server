@@ -38,6 +38,8 @@ export class Clothing extends Schema {
 export class Player extends Schema {
   @type("string") sceneId?: string;
   @type("number") farmId?: number;
+  @type("string") username?: string;
+  @type("string") faction?: string;
   @type("number") experience?: number;
   @type("number") x?: number;
   @type("number") y?: number;
@@ -53,7 +55,9 @@ export class Player extends Schema {
 export class Message extends Schema {
   @type("string") text?: string;
   @type("string") sessionId?: string;
-  @type("number") farmId?: number;
+  @type("number") id?: number;
+  @type("string") username?: string;
+  @type("string") faction?: string;
   @type("number") sentAt?: number;
   @type("string") sceneId?: string;
 }

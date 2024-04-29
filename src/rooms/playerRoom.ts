@@ -66,7 +66,8 @@ export class PlayerRoom extends Room<RoomState> {
           message.sceneId = player.sceneId;
           message.text = input.text;
           message.sessionId = key;
-          message.farmId = player.farmId;
+          message.id = player.farmId;
+          message.username = player.username;
           message.sentAt = Date.now();
           this.pushMessage(message);
         }
