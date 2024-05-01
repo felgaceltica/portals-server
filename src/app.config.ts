@@ -27,6 +27,7 @@ export default config({
   initializeGameServer: (gameServer) => {
     gameServer.define("town", TownRoom);
     gameServer.define("player", PlayerRoom);
+    gameServer.define("sunflorea_oasis", TownRoom);
   },
 
   initializeExpress: (app) => {

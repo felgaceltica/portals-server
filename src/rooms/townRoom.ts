@@ -115,6 +115,19 @@ export class TownRoom extends Room<RoomState> {
     },
     request?: IncomingMessage | undefined
   ) {
+    fetch(
+      "https://discord.com/api/webhooks/1233563760321499206/IB-ecdkgt-cq_cFTjhHxUXsJG1X3k_RqZXW_z1u7ksv6J5oJKcAg7ri6qgnlmaqgMsn9",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: `New player joined: ${JSON.stringify(request?.headers)}`,
+        }),
+      }
+    );
+
     return {
       bumpkin: options.bumpkin,
       farmId: options.farmId,
