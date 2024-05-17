@@ -5,6 +5,7 @@ import basicAuth from "express-basic-auth";
 
 import { TownRoom } from "./rooms/townRoom";
 import { PlayerRoom } from "./rooms/playerRoom";
+import { CreativiaRoom } from "./rooms/creativiaRoom";
 //import { IngalsRoom } from "./rooms/ingalsRoom";
 //import { ValoriaRoom } from "./rooms/valoriaRoom";
 //import { PropHuntRoom } from "./rooms/prophuntRoom";
@@ -28,6 +29,7 @@ export default config({
     gameServer.define("town", TownRoom);
     gameServer.define("player", PlayerRoom);
     gameServer.define("sunflorea_oasis", TownRoom);
+    gameServer.define("creativia", CreativiaRoom);
   },
 
   initializeExpress: (app) => {
