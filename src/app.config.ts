@@ -3,33 +3,31 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import basicAuth from "express-basic-auth";
 
-import { TownRoom } from "./rooms/townRoom";
-import { PlayerRoom } from "./rooms/playerRoom";
-import { CreativiaRoom } from "./rooms/creativiaRoom";
-//import { IngalsRoom } from "./rooms/ingalsRoom";
-//import { ValoriaRoom } from "./rooms/valoriaRoom";
-//import { PropHuntRoom } from "./rooms/prophuntRoom";
+import { PropHuntRoom } from "./rooms/prophuntRoom";
+import { ValoriaRoom } from "./rooms/valoriaRoom";
 
 import { connect } from "./db/client";
 
 import mainRouter from "./api";
+import { BaseRoom } from "./rooms/baseRoom";
 
 const basicAuthMiddleware = basicAuth({
-  // list of users and passwords
   users: {
     admin: process.env.ADMIN_PASS,
   },
-  // sends WWW-Authenticate header, which will prompt the user to fill
-  // credentials in
   challenge: true,
 });
 
 export default config({
   initializeGameServer: (gameServer) => {
-    gameServer.define("town", TownRoom);
-    gameServer.define("player", PlayerRoom);
-    gameServer.define("sunflorea_oasis", TownRoom);
-    gameServer.define("creativia", CreativiaRoom);
+    gameServer.define("local", BaseRoom);
+
+    // Sacul's Rooms
+    gameServer.define("prophunt", PropHuntRoom);
+    gameServer.define("valoria", ValoriaRoom);
+
+    // Community Rooms
+    gameServer.define("poker-house", BaseRoom);
   },
 
   initializeExpress: (app) => {

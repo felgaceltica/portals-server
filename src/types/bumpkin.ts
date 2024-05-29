@@ -10,7 +10,9 @@ export type BumpkinBackground =
   | "China Town Background"
   | "SFL Office Background"
   | "Dawn Breaker Background"
-  | "Mushroom Lights Background";
+  | "Mushroom Lights Background"
+  | "Northern Lights Background"
+  | "Valentine's Field Background";
 
 export type BumpkinBody =
   | "Beige Farmer Potion"
@@ -20,7 +22,13 @@ export type BumpkinBody =
   | "Pirate Potion"
   | "Light Brown Worried Farmer Potion"
   | "Sunburst Potion"
-  | "Infected Potion";
+  | "Infected Potion"
+  | "Infernal Bumpkin Potion"
+  | "Infernal Goblin Potion"
+  | "Pale Potion"
+  | "Squirrel Monkey Potion"
+  | "Mermaid Potion"
+  | "Elf Potion";
 
 export type BumpkinHair =
   | "Basic Hair"
@@ -38,7 +46,14 @@ export type BumpkinHair =
   | "Fire Hair"
   | "Luscious Hair"
   | "Cupid Hair"
-  | "Tangerine Hair";
+  | "Tangerine Hair"
+  | "Wise Hair"
+  | "Greyed Glory"
+  | "Goth Hair"
+  | "Ash Ponytail"
+  | "Pink Ponytail"
+  | "Silver Streaks"
+  | "Brown Rancher Hair";
 
 export type BumpkinShirt =
   | "Red Farmer Shirt"
@@ -68,12 +83,42 @@ export type BumpkinShirt =
   | "Striped Red Shirt"
   | "Striped Yellow Shirt"
   | "Trial Tee"
-  | "Bidder's Brocade";
+  | "Bidder's Brocade"
+  | "Traveller's Shirt"
+  | "Dawn Breaker Tee"
+  | "Merch Tee"
+  | "Merch Hoodie"
+  | "Witches' Eve Tee"
+  | "Wise Robes"
+  | "Tattered Jacket"
+  | "Skull Shirt"
+  | "Chic Gala Blouse"
+  | "Pumpkin Shirt"
+  | "Grey Merch Hoodie"
+  | "Fresh Catch Vest"
+  | "Fish Pro Vest"
+  | "Reel Fishing Vest"
+  | "Clown Shirt"
+  | "Seaside Tank Top"
+  | "Tiki Armor"
+  | "Ugly Christmas Sweater"
+  | "Cozy Hoodie"
+  | "Winter Jacket"
+  | "Crimstone Armor"
+  | "Full Bloom Shirt"
+  | "Blue Blossom Shirt"
+  | "Daisy Tee"
+  | "Blue Monarch Shirt"
+  | "Green Monarch Shirt"
+  | "Orange Monarch Shirt"
+  | "Gift Giver"
+  | "Olive Royalty Shirt";
 
 export type BumpkinCoat =
   | "Chef Apron"
   | "Fruit Picker Apron"
-  | "Pirate General Coat";
+  | "Pirate General Coat"
+  | "Royal Robe";
 
 export type BumpkinTool =
   | "Farmer Pitchfork"
@@ -91,7 +136,27 @@ export type BumpkinTool =
   | "Dawn Lamp"
   | "Water Gun"
   | "Grave Diggers Shovel"
-  | "Auction Megaphone";
+  | "Auction Megaphone"
+  | "Witch's Broom"
+  | "Infernal Pitchfork"
+  | "Merch Coffee Mug"
+  | "Wise Staff"
+  | "Kama"
+  | "Harpoon"
+  | "Ancient Rod"
+  | "Trident"
+  | "Fishing Spear"
+  | "Skinning Knife"
+  | "Sunflower Rod"
+  | "Infernal Rod"
+  | "Pickaxe Shark"
+  | "Candy Cane"
+  | "Beehive Staff"
+  | "Bee Smoker"
+  | "Crimstone Hammer"
+  | "Oil Can"
+  | "Pan"
+  | "Royal Scepter";
 
 export type BumpkinShoe =
   | "Black Farmer Boots"
@@ -101,14 +166,22 @@ export type BumpkinShoe =
   | "Peg Leg"
   | "Cupid Sandals"
   | "Mushroom Shoes"
-  | "Leather Shoes";
+  | "Leather Shoes"
+  | "Old Shoes"
+  | "Flip Flops"
+  | "Wellies"
+  | "Elf Shoes"
+  | "Crimstone Boots"
+  | "Fairy Sandals";
 
 export type BumpkinNecklace =
   | "Sunflower Amulet"
   | "Carrot Amulet"
   | "Beetroot Amulet"
   | "Green Amulet"
-  | "Artist Scarf";
+  | "Artist Scarf"
+  | "Banana Amulet"
+  | "Crimstone Amulet";
 
 export type BumpkinHat =
   | "Farmer Hat"
@@ -117,6 +190,7 @@ export type BumpkinHat =
   | "Skull Hat"
   | "Reindeer Antlers"
   | "Santa Hat"
+  | "Elf Hat"
   | "Lion Dance Mask"
   | "Fruit Bowl"
   | "Pirate Hat"
@@ -128,7 +202,52 @@ export type BumpkinHat =
   | "Fox Hat"
   | "Mushroom Hat"
   | "Harry's Hat"
-  | "Straw Hat";
+  | "Straw Hat"
+  | "Luna's Hat"
+  | "Infernal Horns"
+  | "Cattlegrim"
+  | "Merch Bucket Hat"
+  | "Birthday Hat"
+  | "Double Harvest Cap"
+  | "Streamer Helmet"
+  | "Pumpkin Hat"
+  | "Victorian Hat"
+  | "Boater Hat"
+  | "Crumple Crown"
+  | "Whale Hat"
+  | "Parsnip Horns"
+  | "Halo"
+  | "Unicorn Horn"
+  | "Unicorn Hat"
+  | "Feather Hat"
+  | "Valoria Wreath"
+  | "Earn Alliance Sombrero"
+  | "Luminous Anglerfish Topper"
+  | "Abyssal Angler Hat"
+  | "Fishing Hat"
+  | "Coconut Mask"
+  | "Koi Fish Hat"
+  | "Normal Fish Hat"
+  | "Tiki Mask"
+  | "Seedling Hat"
+  | "Deep Sea Helm"
+  | "Companion Cap"
+  | "Dazzling Dumbo"
+  | "Basic Dumbo"
+  | "Stormy Dumbo"
+  | "Gloomy Dumbo"
+  | "New Years Tiara"
+  | "Beekeeper Hat"
+  | "Propeller Hat"
+  | "Hornet Mask"
+  | "Flower Crown"
+  | "Queen Bee Crown"
+  | "Lucky Red Hat"
+  | "Chicken Hat"
+  | "Love's Topper"
+  | "Non La Hat"
+  | "Crown"
+  | "Tofu Mask";
 
 export type BumpkinPant =
   | "Farmer Overalls"
@@ -145,13 +264,46 @@ export type BumpkinPant =
   | "Beach Trunks"
   | "Wavy Pants"
   | "Mushroom Pants"
-  | "Auctioneer Slacks";
+  | "Auctioneer Slacks"
+  | "Traveller's Pants"
+  | "Wise Slacks"
+  | "Stretched Jeans"
+  | "Crimson Skirt"
+  | "Tattered Slacks"
+  | "Fishing Pants"
+  | "Angler Waders"
+  | "Tiki Pants"
+  | "Short Shorts"
+  | "Gardening Overalls"
+  | "Crimstone Pants";
 
-export type BumpkinDress = "Cupid Dress" | "Beach Sarong" | "Tropical Sarong";
+export type BumpkinDress =
+  | "Cupid Dress"
+  | "Beach Sarong"
+  | "Tropical Sarong"
+  | "Witching Wardrobe"
+  | "Gothic Twilight"
+  | "Dark Enchantment Gown"
+  | "Antique Dress"
+  | "Rose Dress"
+  | "Blue Rose Dress"
+  | "Blue Monarch Dress"
+  | "Green Monarch Dress"
+  | "Orange Monarch Dress";
+
 export type BumpkinSecondaryTool =
   | "Sunflower Shield"
   | "Crab Claw"
-  | "Mushroom Shield";
+  | "Mushroom Shield"
+  | "Wise Book"
+  | "Bucket O' Worms"
+  | "Crab Trap"
+  | "Fish Trap"
+  | "Saw Fish"
+  | "Tackle Box"
+  | "Honeycomb Shield"
+  | "Olive Shield"
+  | "Paw Shield";
 
 // Goes over clothes + head
 export type BumpkinOnesie =
@@ -161,12 +313,36 @@ export type BumpkinOnesie =
   | "Tiger Onesie"
   | "Frog Onesie"
   | "Bunny Onesie"
-  | "Eggplant Onesie";
+  | "Eggplant Onesie"
+  | "Corn Onesie"
+  | "Stockeye Salmon Onesie"
+  | "Banana Onesie"
+  | "Soybean Onesie";
 
 // Goes over clothes
-export type BumpkinSuit = "Reindeer Suit";
+export type BumpkinSuit =
+  | "Reindeer Suit"
+  | "Imp Costume"
+  | "Ox Costume"
+  | "Potato Suit"
+  | "Santa Suit"
+  | "Elf Suit"
+  | "Bee Suit"
+  | "Beekeeper Suit"
+  | "Lucky Red Suit";
 
-export type BumpkinWings = "Angel Wings" | "Devil Wings" | "Love Quiver";
+export type BumpkinWings =
+  | "Angel Wings"
+  | "Devil Wings"
+  | "Love Quiver"
+  | "Traveller's Backpack"
+  | "Crow Wings"
+  | "Bat Wings"
+  | "Butterfly Wings"
+  | "Bee Wings";
+
+export type BumpkinBeard = "Wise Beard" | "Hoary Chin" | "Santa Beard";
+
 export type BumpkinItem =
   | BumpkinBody
   | BumpkinHair
@@ -182,7 +358,8 @@ export type BumpkinItem =
   | BumpkinCoat
   | BumpkinOnesie
   | BumpkinSuit
-  | BumpkinWings;
+  | BumpkinWings
+  | BumpkinBeard;
 
 export const ITEM_IDS: Record<BumpkinItem, number> = {
   "Beige Farmer Potion": 1,
@@ -331,6 +508,174 @@ export const ITEM_IDS: Record<BumpkinItem, number> = {
   "Leather Shoes": 149,
   "Tangerine Hair": 150,
   "Straw Hat": 151,
+  "Traveller's Backpack": 152,
+  "Traveller's Pants": 153,
+  "Traveller's Shirt": 154,
+  "Witching Wardrobe": 155,
+  "Witch's Broom": 156,
+  "Infernal Bumpkin Potion": 157,
+  "Infernal Goblin Potion": 158,
+  "Imp Costume": 159,
+  "Ox Costume": 160,
+  "Luna's Hat": 161,
+  "Infernal Pitchfork": 162,
+  "Infernal Horns": 163,
+  Cattlegrim: 164,
+  "Crumple Crown": 165,
+  "Merch Bucket Hat": 166,
+  "Merch Coffee Mug": 167,
+  "Dawn Breaker Tee": 168,
+  "Merch Tee": 169,
+  "Merch Hoodie": 170,
+  "Birthday Hat": 171,
+  "Double Harvest Cap": 172,
+  "Streamer Helmet": 173,
+  "Corn Onesie": 174,
+  "Crow Wings": 175,
+  "Witches' Eve Tee": 176,
+  "Wise Beard": 177,
+  "Pumpkin Hat": 178,
+  "Wise Book": 179,
+  "Wise Hair": 180,
+  "Wise Robes": 181,
+  "Wise Slacks": 182,
+  "Wise Staff": 183,
+  "Greyed Glory": 184,
+  "Tattered Jacket": 185,
+  "Hoary Chin": 186,
+  "Tattered Slacks": 187,
+  "Old Shoes": 188,
+  "Bat Wings": 189,
+  "Gothic Twilight": 190,
+  "Dark Enchantment Gown": 191,
+  "Goth Hair": 192,
+  "Pale Potion": 193,
+  "Stretched Jeans": 194,
+  "Skull Shirt": 195,
+  "Victorian Hat": 196,
+  "Boater Hat": 197,
+  "Antique Dress": 198,
+  "Crimson Skirt": 199,
+  "Chic Gala Blouse": 200,
+  "Ash Ponytail": 201,
+  "Pink Ponytail": 202,
+  "Silver Streaks": 203,
+  "Brown Rancher Hair": 204,
+  "Parsnip Horns": 205,
+  "Potato Suit": 206,
+  "Whale Hat": 207,
+  "Pumpkin Shirt": 208,
+  Halo: 209,
+  Kama: 210,
+  "Grey Merch Hoodie": 211,
+  "Unicorn Horn": 212,
+  "Unicorn Hat": 213,
+  "Feather Hat": 214,
+  "Valoria Wreath": 215,
+  "Earn Alliance Sombrero": 216,
+  "Fresh Catch Vest": 217,
+  "Fish Pro Vest": 218,
+  "Reel Fishing Vest": 219,
+  "Clown Shirt": 220,
+  "Luminous Anglerfish Topper": 221,
+  "Abyssal Angler Hat": 222,
+  Harpoon: 223,
+  "Ancient Rod": 224,
+  "Fishing Hat": 225,
+  Trident: 226,
+  "Infernal Rod": 227,
+  "Bucket O' Worms": 228,
+  "Coconut Mask": 229,
+  "Crab Trap": 230,
+  "Seaside Tank Top": 231,
+  "Fish Trap": 232,
+  "Fishing Pants": 233,
+  "Angler Waders": 234,
+  "Fishing Spear": 235,
+  "Flip Flops": 236,
+  Wellies: 237,
+  "Saw Fish": 238,
+  "Skinning Knife": 239,
+  "Sunflower Rod": 240,
+  "Tackle Box": 241,
+  "Mermaid Potion": 242,
+  "Squirrel Monkey Potion": 243,
+  "Koi Fish Hat": 244,
+  "Normal Fish Hat": 245,
+  "Stockeye Salmon Onesie": 246,
+  "Tiki Armor": 247,
+  "Tiki Mask": 248,
+  "Tiki Pants": 249,
+  "Banana Amulet": 250,
+  "Banana Onesie": 251,
+  "Basic Dumbo": 252,
+  "Companion Cap": 253,
+  "Dazzling Dumbo": 254,
+  "Deep Sea Helm": 255,
+  "Gloomy Dumbo": 256,
+  "Pickaxe Shark": 257,
+  "Seedling Hat": 258,
+  "Stormy Dumbo": 259,
+  "Ugly Christmas Sweater": 260,
+  "Candy Cane": 261,
+  "Elf Hat": 262,
+  "Elf Potion": 263,
+  "Elf Shoes": 264,
+  "Elf Suit": 265,
+  "Santa Beard": 266,
+  "Santa Suit": 267,
+  "Butterfly Wings": 268,
+  "Cozy Hoodie": 269,
+  "New Years Tiara": 270,
+  "Northern Lights Background": 271,
+  "Short Shorts": 272,
+  "Winter Jacket": 273,
+  "Beehive Staff": 274,
+  "Bee Smoker": 275,
+  "Bee Suit": 276,
+  "Bee Wings": 277,
+  "Beekeeper Hat": 278,
+  "Beekeeper Suit": 279,
+  "Crimstone Boots": 280,
+  "Crimstone Pants": 281,
+  "Crimstone Armor": 282,
+  "Gardening Overalls": 283,
+  "Crimstone Hammer": 284,
+  "Crimstone Amulet": 285,
+  "Full Bloom Shirt": 286,
+  "Blue Blossom Shirt": 287,
+  "Fairy Sandals": 288,
+  "Daisy Tee": 289,
+  "Propeller Hat": 290,
+  "Honeycomb Shield": 291,
+  "Hornet Mask": 292,
+  "Flower Crown": 293,
+  "Blue Monarch Dress": 294,
+  "Green Monarch Dress": 295,
+  "Orange Monarch Dress": 296,
+  "Blue Monarch Shirt": 297,
+  "Green Monarch Shirt": 298,
+  "Orange Monarch Shirt": 299,
+  "Queen Bee Crown": 300,
+  "Rose Dress": 301,
+  "Blue Rose Dress": 302,
+  "Chicken Hat": 303,
+  "Lucky Red Hat": 304,
+  "Lucky Red Suit": 305,
+  "Valentine's Field Background": 306,
+  "Love's Topper": 307,
+  "Oil Can": 308,
+  "Non La Hat": 309,
+  "Olive Shield": 310,
+  "Paw Shield": 311,
+  "Royal Robe": 312,
+  Crown: 313,
+  Pan: 314,
+  "Soybean Onesie": 315,
+  "Gift Giver": 316,
+  "Olive Royalty Shirt": 317,
+  "Royal Scepter": 318,
+  "Tofu Mask": 319,
 };
 
 // The reverse of above
@@ -358,6 +703,7 @@ export type Wallet = {
   suit: BumpkinSuit[];
   wings: BumpkinWings[];
   dress?: BumpkinDress[];
+  beard?: BumpkinBeard[];
 };
 
 export type Equipped = {
@@ -376,6 +722,7 @@ export type Equipped = {
   suit?: BumpkinSuit;
   wings?: BumpkinWings;
   dress?: BumpkinDress;
+  beard?: BumpkinBeard;
 };
 
 export type BumpkinPart = keyof Equipped;
@@ -393,6 +740,7 @@ export const BUMPKIN_ITEMS: Record<string, number> = Object.assign(
 export const BUMPKIN_ITEMS_IDS = Object.values(ITEM_IDS);
 
 export const BUMPKIN_ITEM_PART: Record<BumpkinItem, keyof Wallet> = {
+  "Soybean Onesie": "onesie",
   "Beige Farmer Potion": "body",
   "Dark Brown Farmer Potion": "body",
   "Light Brown Farmer Potion": "body",
@@ -482,7 +830,7 @@ export const BUMPKIN_ITEM_PART: Record<BumpkinItem, keyof Wallet> = {
   "Pirate General Coat": "coat",
   "Pirate Pants": "pants",
   "Pirate Leather Polo": "shirt",
-  "Crab Claw": "tool",
+  "Crab Claw": "secondaryTool",
   "Pirate Scimitar": "tool",
   "Cupid Hair": "hair",
   "Cupid Dress": "dress",
@@ -539,15 +887,173 @@ export const BUMPKIN_ITEM_PART: Record<BumpkinItem, keyof Wallet> = {
   "Leather Shoes": "shoes",
   "Tangerine Hair": "hair",
   "Straw Hat": "hat",
-};
-
-export const BUMPKIN_ITEM_BUFF: Partial<Record<BumpkinItem, string>> = {
-  "Chef Apron": "+20% cake profit",
-  "Fruit Picker Apron": "+0.1 Apple, Orange & Blueberries",
-  "Angel Wings": "Instant Crops",
-  "Devil Wings": "Instant Crops",
-  "Eggplant Onesie": "+0.1 Eggplant",
-  "Golden Spatula": "+10% EXP",
+  "Traveller's Backpack": "wings",
+  "Traveller's Pants": "pants",
+  "Traveller's Shirt": "shirt",
+  "Witching Wardrobe": "dress",
+  "Witch's Broom": "tool",
+  "Infernal Bumpkin Potion": "body",
+  "Infernal Goblin Potion": "body",
+  "Imp Costume": "suit",
+  "Ox Costume": "suit",
+  "Luna's Hat": "hat",
+  "Infernal Pitchfork": "tool",
+  "Infernal Horns": "hat",
+  Cattlegrim: "hat",
+  "Crumple Crown": "hat",
+  "Merch Bucket Hat": "hat",
+  "Merch Coffee Mug": "tool",
+  "Dawn Breaker Tee": "shirt",
+  "Merch Tee": "shirt",
+  "Merch Hoodie": "shirt",
+  "Birthday Hat": "hat",
+  "Double Harvest Cap": "hat",
+  "Streamer Helmet": "hat",
+  "Corn Onesie": "onesie",
+  "Crow Wings": "wings",
+  "Witches' Eve Tee": "shirt",
+  "Wise Beard": "beard",
+  "Pumpkin Hat": "hat",
+  "Wise Book": "secondaryTool",
+  "Wise Hair": "hair",
+  "Wise Robes": "shirt",
+  "Wise Slacks": "pants",
+  "Wise Staff": "tool",
+  "Greyed Glory": "hair",
+  "Tattered Jacket": "shirt",
+  "Hoary Chin": "beard",
+  "Tattered Slacks": "pants",
+  "Old Shoes": "shoes",
+  "Bat Wings": "wings",
+  "Gothic Twilight": "dress",
+  "Dark Enchantment Gown": "dress",
+  "Goth Hair": "hair",
+  "Pale Potion": "body",
+  "Stretched Jeans": "pants",
+  "Skull Shirt": "shirt",
+  "Victorian Hat": "hat",
+  "Boater Hat": "hat",
+  "Antique Dress": "dress",
+  "Crimson Skirt": "pants",
+  "Chic Gala Blouse": "shirt",
+  "Ash Ponytail": "hair",
+  "Pink Ponytail": "hair",
+  "Silver Streaks": "hair",
+  "Brown Rancher Hair": "hair",
+  "Parsnip Horns": "hat",
+  "Potato Suit": "suit",
+  "Whale Hat": "hat",
+  "Pumpkin Shirt": "shirt",
+  Halo: "hat",
+  Kama: "tool",
+  "Grey Merch Hoodie": "shirt",
+  "Unicorn Horn": "hat",
+  "Unicorn Hat": "hat",
+  "Feather Hat": "hat",
+  "Valoria Wreath": "hat",
+  "Earn Alliance Sombrero": "hat",
+  "Fresh Catch Vest": "shirt",
+  "Fish Pro Vest": "shirt",
+  "Reel Fishing Vest": "shirt",
+  "Clown Shirt": "shirt",
+  "Luminous Anglerfish Topper": "hat",
+  "Abyssal Angler Hat": "hat",
+  Harpoon: "tool",
+  "Ancient Rod": "tool",
+  "Fishing Hat": "hat",
+  Trident: "tool",
+  "Bucket O' Worms": "secondaryTool",
+  "Coconut Mask": "hat",
+  "Crab Trap": "secondaryTool",
+  "Seaside Tank Top": "shirt",
+  "Fish Trap": "secondaryTool",
+  "Fishing Pants": "pants",
+  "Angler Waders": "pants",
+  "Fishing Spear": "tool",
+  "Flip Flops": "shoes",
+  Wellies: "shoes",
+  "Saw Fish": "tool",
+  "Skinning Knife": "tool",
+  "Sunflower Rod": "tool",
+  "Tackle Box": "tool",
+  "Infernal Rod": "tool",
+  "Mermaid Potion": "body",
+  "Squirrel Monkey Potion": "body",
+  "Koi Fish Hat": "hat",
+  "Normal Fish Hat": "hat",
+  "Stockeye Salmon Onesie": "onesie",
+  "Tiki Armor": "shirt",
+  "Tiki Mask": "hat",
+  "Tiki Pants": "pants",
+  "Banana Amulet": "necklace",
+  "Banana Onesie": "onesie",
+  "Basic Dumbo": "hat",
+  "Companion Cap": "hat",
+  "Dazzling Dumbo": "hat",
+  "Deep Sea Helm": "hat",
+  "Gloomy Dumbo": "hat",
+  "Pickaxe Shark": "tool",
+  "Seedling Hat": "hat",
+  "Stormy Dumbo": "hat",
+  "Ugly Christmas Sweater": "shirt",
+  "Candy Cane": "tool",
+  "Elf Hat": "hat",
+  "Elf Potion": "body",
+  "Elf Shoes": "shoes",
+  "Elf Suit": "suit",
+  "Santa Beard": "beard",
+  "Santa Suit": "suit",
+  "Butterfly Wings": "wings",
+  "Cozy Hoodie": "shirt",
+  "New Years Tiara": "hat",
+  "Northern Lights Background": "background",
+  "Short Shorts": "pants",
+  "Winter Jacket": "shirt",
+  "Beehive Staff": "tool",
+  "Bee Smoker": "tool",
+  "Bee Suit": "suit",
+  "Bee Wings": "wings",
+  "Beekeeper Hat": "hat",
+  "Beekeeper Suit": "suit",
+  "Crimstone Boots": "shoes",
+  "Crimstone Pants": "pants",
+  "Crimstone Armor": "shirt",
+  "Gardening Overalls": "pants",
+  "Crimstone Hammer": "tool",
+  "Crimstone Amulet": "necklace",
+  "Full Bloom Shirt": "shirt",
+  "Blue Blossom Shirt": "shirt",
+  "Fairy Sandals": "shoes",
+  "Daisy Tee": "shirt",
+  "Propeller Hat": "hat",
+  "Honeycomb Shield": "secondaryTool",
+  "Hornet Mask": "hat",
+  "Flower Crown": "hat",
+  "Blue Monarch Dress": "dress",
+  "Green Monarch Dress": "dress",
+  "Orange Monarch Dress": "dress",
+  "Blue Monarch Shirt": "shirt",
+  "Green Monarch Shirt": "shirt",
+  "Orange Monarch Shirt": "shirt",
+  "Queen Bee Crown": "hat",
+  "Rose Dress": "dress",
+  "Blue Rose Dress": "dress",
+  "Chicken Hat": "hat",
+  "Lucky Red Hat": "hat",
+  "Lucky Red Suit": "suit",
+  "Love's Topper": "hat",
+  "Valentine's Field Background": "background",
+  "Non La Hat": "hat",
+  "Oil Can": "tool",
+  "Olive Shield": "secondaryTool",
+  "Paw Shield": "secondaryTool",
+  "Royal Robe": "coat",
+  Crown: "hat",
+  Pan: "tool",
+  "Gift Giver": "shirt",
+  "Olive Royalty Shirt": "shirt",
+  "Royal Scepter": "tool",
+  "Tofu Mask": "hat",
 };
 
 // TODO - specify your definity of a Bumpkin, including bonus attributes
