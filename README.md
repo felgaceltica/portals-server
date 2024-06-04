@@ -1,4 +1,4 @@
-# Sacul's Portals Server
+# Felga's Portals Server
 
 This server is used as a main server for all my portals.
 
@@ -7,13 +7,9 @@ Feel free to reach out to me, I would be happy to add a room for you on my serve
 
 ## Currently Supported Islands
 
-### Valoria Isle
+### Farmer Soccer
 
-- URL: Closed
-- Status: **Closed**
-- Statistics: 4 months up and running, 10.4k total players.
-
-### Creativia
-
-- URL: https://creativia.sunflower-land.com/
+- URL: 
 - Status: **Work in Progress**
+
+This code is a modified copy from Sacul's Portals Server (https://github.com/0xSacul/sacul-portals-server)
