@@ -3,10 +3,7 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import basicAuth from "express-basic-auth";
 
-import { PropHuntRoom } from "./rooms/prophuntRoom";
-import { ValoriaRoom } from "./rooms/valoriaRoom";
-
-import { connect } from "./db/client";
+import { FarmerSoccerRoom } from "./rooms/farmerSoccerRoom";
 
 import mainRouter from "./api";
 import { BaseRoom } from "./rooms/baseRoom";
@@ -22,12 +19,8 @@ export default config({
   initializeGameServer: (gameServer) => {
     gameServer.define("local", BaseRoom);
 
-    // Sacul's Rooms
-    gameServer.define("prophunt", PropHuntRoom);
-    gameServer.define("valoria", ValoriaRoom);
-
-    // Community Rooms
-    gameServer.define("poker-house", BaseRoom);
+    // Felga's Rooms
+    gameServer.define("farmer_soccer", FarmerSoccerRoom);
   },
 
   initializeExpress: (app) => {
@@ -35,7 +28,7 @@ export default config({
       app.use("/", playground);
     } else {
       app.get("/", (req, res) => {
-        res.redirect("https://github.com/0xSacul/sacul-portals-server");
+        res.redirect("https://github.com/felgaceltica/portals-server");
       });
     }
 
@@ -50,7 +43,4 @@ export default config({
     app.use("/api", mainRouter);
   },
 
-  beforeListen: () => {
-    connect();
-  },
 });
