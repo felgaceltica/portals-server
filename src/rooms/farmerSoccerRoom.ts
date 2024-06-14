@@ -1,4 +1,4 @@
-import { Room, Client } from "colyseus";
+import { Room, Client, Delayed } from "colyseus";
 import {
   Action,
   Bud,
@@ -14,12 +14,13 @@ import {
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
 import { FarmerSoccerRoomState } from "./state/farmersoccer";
-
+import {  CollectionSchema} from "@colyseus/schema";
 const MAX_MESSAGES = 100;
 
 export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
   fixedTimeStep = 1000 / 60;
-
+  public delayedInterval!: Delayed;
+  countdown: number = 5;
   // Safe limit of clients to avoid performance issues
   // Depending on your Portal and server specs, you can increase this number
   maxClients: number = 150;
@@ -61,17 +62,19 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
 
   // This method is called when the room is created
   onCreate(options: any) {
+    this.clock.start();
     this.setState(new FarmerSoccerRoomState());
 
     // set map dimensions
     (this.state.mapWidth = 600), (this.state.mapHeight = 600);
+ 
+    this.resetField();
 
-    //Set score to zero
-    (this.state.scoreLeft = 0), (this.state.scoreRight = 0);
-
-    //set ball to the center of the field
-    (this.state.ballPositionX = 16 * 11), (this.state.ballPositionY = 16 * 5);
-    (this.state.ballVelocityX = 0), (this.state.ballVelocityY = 0);
+    this.state.matchState = "waiting";
+    this.state.leftTeam = new CollectionSchema<number>();
+    this.state.rightTeam = new CollectionSchema<number>();
+    this.state.leftQueue = new CollectionSchema<number>();
+    this.state.rightQueue = new CollectionSchema<number>();
 
     this.onMessage(0, (client, input) => {
       // handle player input
@@ -81,15 +84,56 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
       player?.inputQueue.push(input);
     });
 
+    //bounce ball
     this.onMessage(1, (client, input) => {
-      console.log(input);
-      // handle player input
-      const player = this.state.players.get(client.sessionId);
-
       this.state.ballPositionX = input.ballPositionX;
       this.state.ballPositionY = input.ballPositionY;
       this.state.ballVelocityX = input.ballVelocityX;
       this.state.ballVelocityY = input.ballVelocityY;
+    });
+    
+    //join Right Team
+    this.onMessage(2, (client) => {
+      this.state.rightQueue.add(client.sessionId);
+    });
+
+    //leave Right Team
+    this.onMessage(3, (client) => {
+      this.state.rightQueue.delete(client.sessionId);
+      this.state.rightTeam.delete(client.sessionId);
+    });
+      
+    //join Left ight Team
+    this.onMessage(4, (client) => {
+      this.state.leftQueue.add(client.sessionId);
+    });
+        
+    //leave Left Team
+    this.onMessage(5, (client) => {
+          this.state.leftQueue.delete(client.sessionId);
+          this.state.leftTeam.delete(client.sessionId);
+    });
+
+    //confirm Right Team
+    this.onMessage(6, (client) => {
+      this.state.rightTeamConfirmed = true;      
+    });
+
+    //confirm Left Team
+    this.onMessage(7, (client) => {
+      this.state.leftTeamConfirmed = true;      
+    });
+
+    //Left Goal
+    this.onMessage(8, (client) => {
+      this.state.scoreLeft += 1;
+      this.checkFinishGame();
+    });
+
+    //Right Goal
+    this.onMessage(9, (client) => {
+      this.state.scoreRight += 1;      
+      this.checkFinishGame();
     });
 
     let elapsedTime = 0;
@@ -102,10 +146,95 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
       }
     });
   }
+  checkFinishGame(){
+    this.broadcast("goal");
+    if(this.state.scoreLeft==2){
+      this.state.matchState = "finished";
+      this.broadcast("winner",{players: this.state.leftTeam, side:"left"});
+      this.broadcast("loser",{players: this.state.rightTeam, side:"right"});
+    }
+    else if(this.state.scoreRight == 2){
+      this.state.matchState = "finished";
+      this.broadcast("winner",{players: this.state.rightTeam, side:"right"});
+      this.broadcast("loser",{players: this.state.leftTeam, side:"left"});
+    }
+    else{
+      this.clock.setTimeout(() => {
+        this.kickOff();
+      }, 3000);
+    }
+    if(this.state.matchState=="finished"){
+      this.state.leftTeam.clear();
+      this.state.rightTeam.clear();
+      this.resetField();
+      this.clock.setTimeout(() => {
+        this.state.matchState = "waiting";
+      }, 10000);
+    }
+  }
+  resetBallPosition(){
+    //set ball to the center of the field
+    (this.state.ballPositionX = 16 * 11), (this.state.ballPositionY = 16 * 5);
+    (this.state.ballVelocityX = 0), (this.state.ballVelocityY = 0);
 
+  }
+  resetField(){
+    //Set score to zero
+    (this.state.scoreLeft = 0), (this.state.scoreRight = 0);
+    this.resetBallPosition();
+  }
+  kickOff(){
+    this.state.matchState = "playing";
+    (this.state.ballPositionX = 16 * 11), (this.state.ballPositionY = 16 * 5);
+    var angle = (Math.floor(Math.random() * 360)) * (Math.PI/180);
+    var velocityX = (60*Math.cos(angle));
+    var velocityY = (60*Math.sin(angle));
+    (this.state.ballVelocityX = velocityX), (this.state.ballVelocityY = velocityY);
+    this.broadcast("whistle",1);
+  }
   // This method is called every fixed time step (1000 / 60)
   fixedTick(timeStep: number) {
     const velocity = 1.68;
+    if(this.state.leftTeam.size == 0 && this.state.leftQueue.size > 0){
+      var first = this.state.leftQueue.at(0);
+      this.state.leftTeamConfirmed = false
+      this.state.leftTeam.add(first);
+      this.state.leftQueue.delete(first);
+    }
+    if(this.state.rightTeam.size == 0 && this.state.rightQueue.size > 0){
+      var first = this.state.rightQueue.at(0);
+      this.state.rightTeamConfirmed = false;
+      this.state.rightTeam.add(first);
+      this.state.rightQueue.delete(first);
+    }
+    switch(this.state.matchState){
+      case "waiting":
+          if(this.state.leftTeam.size == 1 && this.state.rightTeam.size == 1){
+            this.state.leftTeamConfirmed = false;
+            this.state.rightTeamConfirmed = false;
+            this.state.matchState = "starting";
+          }
+          break;
+        case "starting":
+          if(this.state.leftTeamConfirmed && this.state.rightTeamConfirmed){
+            this.resetField();
+            this.state.matchState = "counting";
+            this.countdown = 6;
+            this.delayedInterval = this.clock.setInterval(() => {
+              this.countdown--;
+              this.broadcast("countdown", this.countdown);
+              if(this.countdown<0){
+                this.delayedInterval.clear();
+                this.kickOff();
+              }
+            }, 1000);
+          }
+          break;
+
+    }
+    if(this.state.leftTeam.size == 0 || this.state.rightTeam.size == 0){      
+      this.resetField();
+    }
 
     this.state.players.forEach((player, key) => {
       let input: InputData | undefined;
@@ -265,7 +394,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
 
       if (
         client &&
-        this.state.players.get(client.sessionId)?.sceneId === "corn_maze"
+        this.state.players.get(client.sessionId)?.sceneId === "farmer_soccer"
       ) {
         throw new Error("You are already connected");
       }
@@ -305,8 +434,31 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
 
   // This method is called when a client leaves the room
   onLeave(client: Client, consented: boolean) {
+    if(this.state.matchState=="playing" || this.state.matchState=="starting" || this.state.matchState=="counting"){      
+      if(this.state.leftTeam.has(client.sessionId)){
+        this.resetField();
+        this.state.matchState="leftAbandon";
+        this.clock.setTimeout(() => {
+          this.state.matchState = "waiting";
+        }, 10000);
+        this.broadcast("abandon", "left");
+      }
+      if(this.state.rightTeam.has(client.sessionId)){
+        this.resetField();
+        this.state.matchState="rightAbandon";
+        this.clock.setTimeout(() => {
+          this.state.matchState = "waiting";
+        }, 10000);
+        this.broadcast("abandon", "right");
+      }
+    }
     this.state.players.delete(client.sessionId);
     this.state.buds.delete(client.sessionId);
+    this.state.rightQueue.delete(client.sessionId);
+    this.state.leftQueue.delete(client.sessionId);
+    this.state.leftTeam.delete(client.sessionId);
+    this.state.rightTeam.delete(client.sessionId);
+    console.log('leave ' + client.sessionId);
   }
 
   // This method is called when the room is disposed
