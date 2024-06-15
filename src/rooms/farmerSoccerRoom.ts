@@ -85,11 +85,8 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
     });
 
     //bounce ball
-    this.onMessage(1, (client, input) => {
-      this.state.ballPositionX = input.ballPositionX;
-      this.state.ballPositionY = input.ballPositionY;
-      this.state.ballVelocityX = input.ballVelocityX;
-      this.state.ballVelocityY = input.ballVelocityY;
+    this.onMessage(1, (client, input) => {      
+      this.broadcast("ballPosition", input,{except: client});
     });
     
     //join Right Team
@@ -174,9 +171,13 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
   }
   resetBallPosition(){
     //set ball to the center of the field
-    (this.state.ballPositionX = 16 * 11), (this.state.ballPositionY = 16 * 5);
-    (this.state.ballVelocityX = 0), (this.state.ballVelocityY = 0);
-
+    var input = {
+      ballPositionX: 16 * 11,
+      ballPositionY: 16 * 5,
+      ballVelocityX: 0,
+      ballVelocityY: 0,
+    }
+    this.broadcast("ballPosition", input);
   }
   resetField(){
     //Set score to zero
@@ -185,11 +186,16 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
   }
   kickOff(){
     this.state.matchState = "playing";
-    (this.state.ballPositionX = 16 * 11), (this.state.ballPositionY = 16 * 5);
     var angle = (Math.floor(Math.random() * 360)) * (Math.PI/180);
     var velocityX = (60*Math.cos(angle));
     var velocityY = (60*Math.sin(angle));
-    (this.state.ballVelocityX = velocityX), (this.state.ballVelocityY = velocityY);
+    var input = {
+      ballPositionX: 16 * 11,
+      ballPositionY: 16 * 5,
+      ballVelocityX: velocityX,
+      ballVelocityY: velocityY,
+    }
+    this.broadcast("ballPosition", input);
     this.broadcast("whistle",1);
   }
   // This method is called every fixed time step (1000 / 60)
