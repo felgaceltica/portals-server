@@ -71,10 +71,10 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
     this.resetField();
 
     this.state.matchState = "waiting";
-    this.state.leftTeam = new CollectionSchema<number>();
-    this.state.rightTeam = new CollectionSchema<number>();
-    this.state.leftQueue = new CollectionSchema<number>();
-    this.state.rightQueue = new CollectionSchema<number>();
+    this.state.leftTeam = new CollectionSchema<string>();
+    this.state.rightTeam = new CollectionSchema<string>();
+    this.state.leftQueue = new CollectionSchema<string>();
+    this.state.rightQueue = new CollectionSchema<string>();
 
     this.onMessage(0, (client, input) => {
       // handle player input
