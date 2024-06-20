@@ -13,3 +13,5 @@ Feel free to reach out to me, I would be happy to add a room for you on my serve
 - Status: **Work in Progress**
 
 This code is a modified copy from Sacul's Portals Server (https://github.com/0xSacul/sacul-portals-server)
+
+To deploy: npx @colyseus/cloud deploy
