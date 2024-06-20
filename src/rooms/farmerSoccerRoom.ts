@@ -87,6 +87,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
     //bounce ball
     this.onMessage(1, (client, input) => {      
       this.broadcast("ballPosition", input,{except: client});
+      this.state.lastBallPositionId = client.sessionId;
     });
     
     //join Right Team
@@ -123,14 +124,18 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
 
     //Left Goal
     this.onMessage(8, (client) => {
-      this.state.scoreLeft += 1;
-      this.checkFinishGame();
+      if(this.state.lastBallPositionId == client.sessionId || this.state.lastBallPositionId == "server"){
+        this.state.scoreLeft += 1;
+        this.checkFinishGame();
+      }
     });
 
     //Right Goal
     this.onMessage(9, (client) => {
-      this.state.scoreRight += 1;      
-      this.checkFinishGame();
+      if(this.state.lastBallPositionId == client.sessionId || this.state.lastBallPositionId == "server"){
+        this.state.scoreRight += 1;      
+        this.checkFinishGame();
+      }
     });
 
     let elapsedTime = 0;
@@ -178,6 +183,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
       ballVelocityY: 0,
     }
     this.broadcast("ballPosition", input);
+    this.state.lastBallPositionId = "server";
   }
   resetField(){
     //Set score to zero
@@ -196,6 +202,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
       ballVelocityY: velocityY,
     }
     this.broadcast("ballPosition", input);
+    this.state.lastBallPositionId = "server";
     this.broadcast("whistle",1);
   }
   // This method is called every fixed time step (1000 / 60)
