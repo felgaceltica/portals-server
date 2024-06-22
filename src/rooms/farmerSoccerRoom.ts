@@ -125,6 +125,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
     //Left Goal
     this.onMessage(8, (client) => {
       if(this.state.lastBallPositionId == client.sessionId || this.state.lastBallPositionId == "server"){
+        this.state.lastBallPositionId = "server1";
         this.state.scoreLeft += 1;
         this.checkFinishGame();
       }
@@ -133,6 +134,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
     //Right Goal
     this.onMessage(9, (client) => {
       if(this.state.lastBallPositionId == client.sessionId || this.state.lastBallPositionId == "server"){
+        this.state.lastBallPositionId = "server1";
         this.state.scoreRight += 1;      
         this.checkFinishGame();
       }
