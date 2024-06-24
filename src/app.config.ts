@@ -3,7 +3,7 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import basicAuth from "express-basic-auth";
 
-import { FarmerSoccerRoom } from "./rooms/farmerSoccerRoom";
+import { FarmerFootballRoom } from "./rooms/farmerFootballRoom";
 
 import mainRouter from "./api";
 import { BaseRoom } from "./rooms/baseRoom";
@@ -20,7 +20,7 @@ export default config({
     gameServer.define("local", BaseRoom);
 
     // Felga's Rooms
-    gameServer.define("farmer_soccer", FarmerSoccerRoom);
+    gameServer.define("farmer_football", FarmerFootballRoom);
   },
 
   initializeExpress: (app) => {

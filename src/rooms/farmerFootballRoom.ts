@@ -13,11 +13,11 @@ import {
 } from "./state/base";
 import { IncomingMessage } from "http";
 import { Bumpkin } from "../types/bumpkin";
-import { FarmerSoccerRoomState } from "./state/farmersoccer";
+import { FarmerFootballRoomState } from "./state/farmerfootball";
 import {  CollectionSchema} from "@colyseus/schema";
 const MAX_MESSAGES = 100;
 
-export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
+export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
   fixedTimeStep = 1000 / 60;
   public delayedInterval!: Delayed;
   countdown: number = 5;
@@ -63,7 +63,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
   // This method is called when the room is created
   onCreate(options: any) {
     this.clock.start();
-    this.setState(new FarmerSoccerRoomState());
+    this.setState(new FarmerFootballRoomState());
 
     // set map dimensions
     (this.state.mapWidth = 600), (this.state.mapHeight = 600);
@@ -409,7 +409,7 @@ export class FarmerSoccerRoom extends Room<FarmerSoccerRoomState> {
 
       if (
         client &&
-        this.state.players.get(client.sessionId)?.sceneId === "farmer_soccer"
+        this.state.players.get(client.sessionId)?.sceneId === "farmer_football"
       ) {
         throw new Error("You are already connected");
       }

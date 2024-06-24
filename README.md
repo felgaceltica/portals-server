@@ -7,7 +7,7 @@ Feel free to reach out to me, I would be happy to add a room for you on my serve
 
 ## Currently Supported Islands
 
-### Farmer Soccer
+### Farmer Football
 
 - URL: 
 - Status: **Work in Progress**

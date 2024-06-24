@@ -1,7 +1,7 @@
 import { type, CollectionSchema} from "@colyseus/schema";
 import { BaseRoomState } from "./base";
 
-export class FarmerSoccerRoomState extends BaseRoomState {
+export class FarmerFootballRoomState extends BaseRoomState {
   @type("number") scoreLeft?: number;
   @type("number") scoreRight?: number;
 
