@@ -228,9 +228,38 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
             this.state.leftTeamConfirmed = false;
             this.state.rightTeamConfirmed = false;
             this.state.matchState = "starting";
+            this.state.confirmationTime = this.clock.currentTime;
           }
           break;
         case "starting":
+          if(((this.clock.currentTime - this.state.confirmationTime) / 1000) > 30){
+            if(this.state.leftTeamConfirmed == false){
+              this.state.leftTeam.clear();
+            }
+            if(this.state.rightTeamConfirmed == false){
+              this.state.rightTeam.clear();
+            }
+          }
+          if(this.state.leftTeam.size == 0){
+            this.resetField();
+            this.state.matchState="leftAbandon";
+            this.state.leftTeamConfirmed = false;
+            this.state.rightTeamConfirmed = false;
+            this.clock.setTimeout(() => {
+              this.state.matchState = "waiting";
+            }, 10000);
+            this.broadcast("abandon", "left");
+          }
+          if(this.state.rightTeam.size == 0){
+            this.resetField();
+            this.state.matchState="rightAbandon";
+            this.state.leftTeamConfirmed = false;
+            this.state.rightTeamConfirmed = false;
+            this.clock.setTimeout(() => {
+              this.state.matchState = "waiting";
+            }, 10000);
+            this.broadcast("abandon", "right");
+          }
           if(this.state.leftTeamConfirmed && this.state.rightTeamConfirmed){
             this.resetField();
             this.state.matchState = "counting";
@@ -244,8 +273,8 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
               }
             }, 1000);
           }
-          break;
 
+          break;
     }
     if(this.state.leftTeam.size == 0 || this.state.rightTeam.size == 0){      
       this.resetField();
@@ -449,7 +478,7 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
 
   // This method is called when a client leaves the room
   onLeave(client: Client, consented: boolean) {
-    if(this.state.matchState=="playing" || this.state.matchState=="starting" || this.state.matchState=="counting"){      
+    if(this.state.matchState=="playing" || this.state.matchState=="counting"){      
       if(this.state.leftTeam.has(client.sessionId)){
         this.resetField();
         this.state.matchState="leftAbandon";

@@ -16,4 +16,6 @@ export class FarmerFootballRoomState extends BaseRoomState {
   rightTeamConfirmed: boolean;
 
   lastBallPositionId: string;
+
+  confirmationTime: number;
 }
