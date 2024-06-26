@@ -86,7 +86,19 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
 
     //bounce ball
     this.onMessage(1, (client, input) => {      
-      this.broadcast("ballPosition", input,{except: client});
+      //this.broadcast("ballPosition", input,{except: client});
+      var opponentSessionId = "";
+      if(this.state.rightTeam.has(client.sessionId)){
+        opponentSessionId = this.state.leftTeam.at(0);
+      }
+      if(this.state.leftTeam.has(client.sessionId)){
+        opponentSessionId = this.state.rightTeam.at(0);
+      }
+      const opponent = this.clients.find(
+        (client) => client.sessionId === opponentSessionId
+      );
+      opponent.send("ballPosition", input);
+      this.broadcast("ballPosition", input,{except: [client,opponent]});
       this.state.lastBallPositionId = client.sessionId;
     });
     
