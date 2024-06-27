@@ -18,7 +18,7 @@ import {  CollectionSchema} from "@colyseus/schema";
 const MAX_MESSAGES = 100;
 
 export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
-  fixedTimeStep = 1000 / 120;
+  fixedTimeStep = 1000 / 60;
   public delayedInterval!: Delayed;
   countdown: number = 5;
   // Safe limit of clients to avoid performance issues
@@ -68,14 +68,18 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
     // set map dimensions
     (this.state.mapWidth = 600), (this.state.mapHeight = 600);
  
-    this.resetField();
-
+    
     this.state.matchState = "waiting";
     this.state.leftTeam = new CollectionSchema<string>();
     this.state.rightTeam = new CollectionSchema<string>();
     this.state.leftQueue = new CollectionSchema<string>();
     this.state.rightQueue = new CollectionSchema<string>();
-
+    this.state.ballChanged = 0;
+    this.state.ballX = 0;
+    this.state.ballY = 0;
+    this.state.ballVX = 0;
+    this.state.ballVY = 0;
+    this.resetField();
     this.onMessage(0, (client, input) => {
       // handle player input
       const player = this.state.players.get(client.sessionId);
@@ -97,8 +101,13 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
       const opponent = this.clients.find(
         (client) => client.sessionId === opponentSessionId
       );
-      opponent.send("ballPosition", input);
-      this.broadcast("ballPosition", input,{except: [client,opponent]});
+      // opponent.send("ballPosition", input);
+      // this.broadcast("ballPosition", input,{except: [client,opponent]});
+      this.state.ballChanged++;
+      this.state.ballX = input.ballPositionX;
+      this.state.ballY = input.ballPositionY;
+      this.state.ballVX = input.ballVelocityX;
+      this.state.ballVY = input.ballVelocityY;
       this.state.lastBallPositionId = client.sessionId;
     });
     
@@ -202,7 +211,12 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
       ballVelocityX: 0,
       ballVelocityY: 0,
     }
-    this.broadcast("ballPosition", input);
+    //this.broadcast("ballPosition", input);
+    this.state.ballChanged++;
+    this.state.ballX = input.ballPositionX;
+    this.state.ballY = input.ballPositionY;
+    this.state.ballVX = input.ballVelocityX;
+    this.state.ballVY = input.ballVelocityY;
     this.state.lastBallPositionId = "server";
   }
   resetField(){
@@ -221,7 +235,12 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
       ballVelocityX: velocityX,
       ballVelocityY: velocityY,
     }
-    this.broadcast("ballPosition", input);
+    this.state.ballChanged++;
+    this.state.ballX = input.ballPositionX;
+    this.state.ballY = input.ballPositionY;
+    this.state.ballVX = input.ballVelocityX;
+    this.state.ballVY = input.ballVelocityY;
+    //this.broadcast("ballPosition", input);
     this.state.lastBallPositionId = "server";
     this.broadcast("whistle",1);
   }
