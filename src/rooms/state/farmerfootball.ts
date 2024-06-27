@@ -11,6 +11,8 @@ export class FarmerFootballRoomState extends BaseRoomState {
 
   @type({ collection: "string" }) leftQueue = new CollectionSchema<string>();
   @type({ collection: "string" }) rightQueue = new CollectionSchema<string>();
+
+  @type("number") currentTime?: number;
   
   leftTeamConfirmed: boolean;
   rightTeamConfirmed: boolean;

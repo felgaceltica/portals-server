@@ -166,6 +166,7 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
         this.fixedTick(this.fixedTimeStep);
       }
     });
+    this.state.currentTime = this.clock.currentTime;
   }
   checkFinishGame(){
     this.broadcast("goal");
@@ -226,6 +227,7 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
   }
   // This method is called every fixed time step (1000 / 60)
   fixedTick(timeStep: number) {
+    this.state.currentTime = this.clock.currentTime;
     const velocity = 1.68;
     if(this.state.leftTeam.size == 0 && this.state.leftQueue.size > 0){
       var first = this.state.leftQueue.at(0);
