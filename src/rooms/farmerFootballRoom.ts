@@ -235,6 +235,30 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
       this.state.rightQueue.delete(first);
     }
     switch(this.state.matchState){
+      case "playing":
+        if(this.state.leftTeam.size == 0){
+          if(this.state.leftTeam.size == 0){
+            this.resetField();
+            this.state.matchState="leftAbandon";
+            this.state.leftTeamConfirmed = false;
+            this.state.rightTeamConfirmed = false;
+            this.clock.setTimeout(() => {
+              this.state.matchState = "waiting";
+            }, 10000);
+            this.broadcast("abandon", "left");
+          }
+          if(this.state.rightTeam.size == 0){
+            this.resetField();
+            this.state.matchState="rightAbandon";
+            this.state.leftTeamConfirmed = false;
+            this.state.rightTeamConfirmed = false;
+            this.clock.setTimeout(() => {
+              this.state.matchState = "waiting";
+            }, 10000);
+            this.broadcast("abandon", "right");
+          }
+        }
+        break;
       case "waiting":
           if(this.state.leftTeam.size == 1 && this.state.rightTeam.size == 1){
             this.state.leftTeamConfirmed = false;
