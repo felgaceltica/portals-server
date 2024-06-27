@@ -18,7 +18,7 @@ import {  CollectionSchema} from "@colyseus/schema";
 const MAX_MESSAGES = 100;
 
 export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
-  fixedTimeStep = 1000 / 60;
+  fixedTimeStep = 1000 / 120;
   public delayedInterval!: Delayed;
   countdown: number = 5;
   // Safe limit of clients to avoid performance issues
