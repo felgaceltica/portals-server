@@ -17,7 +17,7 @@ module.exports = {
       production : {
         "user" : "deploy",
         "host" : ["217.69.5.216"],
-        "ref"  : "main",
+        "ref"  : "origin/main",
         "repo" : "git@github.com:felgaceltica/portals-server.git",
         "path" : "/home/deploy",
         "post-deploy" : "npm install && npm run build && npm exec colyseus-post-deploy"
