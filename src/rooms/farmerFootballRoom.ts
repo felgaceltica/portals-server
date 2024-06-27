@@ -152,6 +152,11 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
       }
     });
 
+    //Ping
+    this.onMessage("ping", (client, input) => {
+      client.send("pingResponse", input);     
+    });
+
     let elapsedTime = 0;
     this.setSimulationInterval((deltaTime) => {
       elapsedTime += deltaTime;
