@@ -16,7 +16,7 @@ module.exports = {
     deploy : {
       production : {
         "user" : "deploy",
-        "host" : ["95.179.144.104"],
+        "host" : ["216.238.112.132"],
         "ref"  : "origin/main",
         "repo" : "git@github.com:felgaceltica/portals-server.git",
         "path" : "/home/deploy",
