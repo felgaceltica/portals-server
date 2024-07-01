@@ -197,8 +197,8 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
     if(this.state.matchState=="finished"){
       this.state.leftTeam.clear();
       this.state.rightTeam.clear();
-      this.resetField();
       this.clock.setTimeout(() => {
+        this.resetField();
         this.state.matchState = "waiting";
       }, 10000);
     }
@@ -556,7 +556,7 @@ export class FarmerFootballRoom extends Room<FarmerFootballRoomState> {
           this.state.matchState = "waiting";
         }, 10000);
         this.broadcast("abandon", "right");
-      }
+      }      
     }
     this.state.players.delete(client.sessionId);
     this.state.buds.delete(client.sessionId);
